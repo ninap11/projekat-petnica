@@ -1,11 +1,17 @@
+#ovo je da pretvorim dictionary u nesto lakse za
+
 import csv
 import os.path
+
+
 csv_dictionary = open(os.path.join("D:\Downloads","LoughranMcDonald_MasterDictionary_2018.csv"), "r", newline="")
 reader = csv.reader(csv_dictionary, delimiter=',', quotechar='"')
 new_dictionary = open(os.path.join('D:\Projekat','Seconddict.csv'), "w", newline = "")
+
 words = []
 negative = []
 positive = []
+
 #i = 0
 for row in reader:
     words.append(row[0])
