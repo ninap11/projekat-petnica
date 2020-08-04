@@ -15,7 +15,9 @@ btc = yf.Ticker("BTC-USD")
 # print(btc.info)
 data = yf.download("BTC-USD",start='2020-07-07', end='2020-07-08')
 
+print(data)
 
+"""
 prices_csv = open(os.path.join("D:\Projekat", "shares.csv"), "w", newline = "")
 writer = csv.writer(prices_csv, delimiter=',', quotechar='"')
 
@@ -31,6 +33,6 @@ for date in dates:
     
     c+=1
 
-
+"""
 
 print("done")
