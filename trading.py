@@ -40,8 +40,8 @@ for date in dates:
         current_sentiment = sentiment_dictionary[date]
         sentiments.append(current_sentiment)
 
-        sentiment_trend += sentiment - previous_sentiment
-        previous_sentiment = sentiment
+        sentiment_trend += current_sentiment - previous_sentiment
+        previous_sentiment = current_sentiment
 
         sentiment_mean += current_sentiment
 
@@ -66,7 +66,7 @@ sentiment_shock = (current_sentiment - sentiment_mean) / sentiment_deviation
 
 spear_rank = stats.spearmanr(sentiments, stocks)
 i = spear_rank.index(max(spear_rank))
-N = dates[i]
+N = dates[i] # treba da se oduzme od datuma trenutnog
 
 
 
@@ -75,6 +75,8 @@ trend_higher_percentile = 90.0
 
 trend_values = [] #array of values of sentiment trend
 # trend_percentile = stats.percentileofscore(trend_values, sentiment_trend) #percentile of sentiment trend in the array
+trend_percentile = 1.0
+
 
 trend_stocks = 0 #pocinjemo bez bitcoina
 
@@ -89,9 +91,16 @@ shock_higher_percentile = 90.0
 
 shock_values = [] #array of values of sentiment shock
 # shock_percentile = stats.percentileofscore(shock_values, sentiment_shock) #same
+shock_percentile = 1.0
+
+shock_stocks = 0
 
 if shock_percentile < shock_lower_percentile:
     shock_stocks -= 1 #prodajemo
 elif shock_percentile > shock_higher_percentile:
     shock_stocks += 1 #kupujemo
+
+
+
+
      
