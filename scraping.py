@@ -28,7 +28,8 @@ txt_file = open(complete_title, "a")
 #txt_file.write(date + " ")
 
 tags = soup.find("section", class_ = "has-media news article-body"). find_all("li")
-
+print(tags)
+"""
 for tag in tags:    
     if tag.a:
         tag.a.unwrap()
@@ -59,7 +60,7 @@ txt_file3.write("\n")
 # print(no_stop_words)
 #print(nltk.corpus.stopwords.words('english'))
 
-
+"""
 
 
     

@@ -101,6 +101,6 @@ elif shock_percentile > shock_higher_percentile:
     shock_stocks += 1 #kupujemo
 
 
-
+print("done")
 
      

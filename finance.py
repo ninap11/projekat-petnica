@@ -24,7 +24,7 @@ writer = csv.writer(prices_csv, delimiter=',', quotechar='"')
 c = 0
 
 
-for date in dates:
+for date in dates:      
     opening_price = list(data["Open"])[c]
     closing_price = list(data["Close"])[c]
     
