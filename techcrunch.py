@@ -69,7 +69,7 @@ while True:
                 print("mistake", link)
 
             o +=1
-            driver2.close()
+            driver2.close()  n
             window_before = driver2.window_handles[0] 
             driver2.switch_to_window(window_before)
             driver2.close()

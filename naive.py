@@ -11,10 +11,10 @@ from nltk.classify import naivebayes
 
 
 
-txt_file2 = open(os.path.join("D:\Projekat", "Binance Acquires Crypto Debit Card Provider Swipe for Undisclosed Sum.txt"), "r+")
+txt_file2 = open(os.path.join("D:\Projekat", "a.txt"), "r+")
 separated_file = [nltk.word_tokenize(t) for t in nltk.sent_tokenize(txt_file2.readlines()[0])]
 
-values = ["neu", "neu", "pos", "neu", "neu", "neg", "neu"]
+values = ["neu", "neu"]
 # for sentence in separated_file:
 #    print(sentence)
 #    value = input() #pos or neg value of the sentence
@@ -34,15 +34,21 @@ nltk.sentiment.util.mark_negation(no_stop_words, False, True)
 
 c = 0
 featureset = []
+print(no_stop_words)
+
+
+
 for sentence in no_stop_words:
     d = {word: (word in sentence) for word in vocabulary}
     tup = (d, values[c])
     featureset.append(tup)
     c += 1
 
+print(featureset)
+
 classifier = nltk.NaiveBayesClassifier.train(featureset)
 print(classifier.show_most_informative_features(10))
-#print(featureset)
-#print(vocabulary)
+print(featureset)
+print(vocabulary)
 
 print("done")

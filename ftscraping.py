@@ -15,6 +15,14 @@ import time
 from selenium.webdriver.support import expected_conditions as EC
 # from datetime import datetime 
 
+def background_calculation():
+    # here goes some long calculation
+    time.sleep(1)
+
+    # when the calculation is done, the result is stored in a global variable
+    global result
+    result = 42
+    result_available.set()
 
 
 
