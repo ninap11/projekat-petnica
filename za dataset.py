@@ -1,72 +1,90 @@
-# from datetime import datetime
-# from selenium import webdriver
 
-# from selenium.webdriver import Chrome, ChromeOptions
+import random
 
-# # options = ChromeOptions()
-# # options.add_extension(r"D:\Downloads\bypass-paywalls-chrome-master\bypass-paywalls-chrome-master.crx")
+txt_file = open(r"C:\Users\Bratislav\Desktop\petnica projekat\data\train set.txt", "r+", encoding= "utf-8-sig")
+lines = txt_file.readlines()
+# lines = []
+txt_file.close()
 
-# # driver = Chrome("C:/chromedriver_win32/chromedriver.exe", options=options)
+values_file = open(r"C:\Users\Bratislav\Desktop\petnica projekat\data\values.txt", "r+", encoding= "utf-8-sig")
+values = values_file.readlines()
+values_file.close()
 
-# # # (optional) Look at the uploaded extension
-# # driver.get("https://www.wsj.com/articles/former-uber-security-chief-charged-criminally-in-connection-with-2016-hack-11597953234?mod=searchresults&page=1&pos=1")
+mistakes = []
 
-# a = "Aug. 12, 2020 6:01 am ET"
-# a = a[:-6]
-# a = a[:-4] + "0" + a[-4:]  
+os = []
+ns = []
+ps = []
+os_v = []
+ns_v = []
+ps_v = []
 
-# print(a )
-# date = datetime.strptime(a, "%b. %d, %Y %I:%M").date()
-# print(date)
 
-# txt = open(r'D:\Projekat\WSJmistake.txt', "r", encoding="utf-8")
-# print(txt[0])
-
-txt = open(r'D:\Projekat\data\test set.txt', "r", encoding="utf-8")
-lines = txt.readlines()
-txt.close()
-
-txt2 = open(r'D:\Projekat\data\values test set.txt', "a", encoding="utf-8") 
-values = []
-
-c = 0
-for line in lines:
-
-    ind = line.index(" ")
-    if len(line) > 20:
-        if line[ind+12] == ";":
-            idn = line[0:ind]
-            print(idn)
-
-            ind2 = line[ind+14:].find(";")
-            ind2 += ind + 13
-            title = line[ind+14:ind2]
-            print(title)
-
-            inp = str(input("v: "))
-            full = idn + " " + inp + "\n"
-            values.append(full)
-            txt2.write(full)
-            # print(values)
+i = 0
+while i < len(lines):
+    line = lines[i]
+    id_number1 = line[:line.index(" ")].strip()
+    
+    value = values[i][line.index(" ") + 1 :].strip()
+    id_number2 = values[i][:values[i].index(" ")]
+    if id_number1 != id_number2:
+        mistakes.append(line[:30])
+    else:
+        print(value)
+        if value == "o":
+            os.append(line)
+            full = id_number1 + " " + value + "\n"
+            os_v.append(full) 
+        elif value == "n":
+            ns.append(line)
+            full = id_number1 + " " + value + "\n"
+            ps_v.append(full) 
         else:
-            # print("naha")
-            idn = line[0:ind]
-            print(idn)
+            ps.append(line)
+            full = id_number1 + " " + value + "\n"
+            ns_v.append(full) 
+    i+=1
+    
+print(len(ns), len(ps), len(os))
+length = min(len(ns), len(ps), len(os))
 
-            ind2 = line.find(";")
-            title = line[ind+12:ind2]
-            print(title)
-            
-            inp = str(input("v: "))
-            full = idn + " " + inp + "\n"
-            values.append(full)
-            txt2.write(full)
-            # print(values)
+for i in range(375):
+    print("len", length)
+    r = random.randint(0, length-1)
+    del os[r]
+    del ns[r]
+    del ps[r]
+    del os_v[r]
+    del ns_v[r]
+    del ps_v[r]
+    length -= 1
+    
+length = len(os)
+for i in range(375):
+    r = r = random.randint(0, length-1)
+    del os[r]
+    del os_v[r]
+    length -=1    
 
-# txt2.writelines(values) 
-txt2.close()   
+lines = ns
+values = ns_v
 
-# txt = open(r'D:\Projekat\New folder\train set.txt', "w", encoding="utf-8")
-# txt.writelines(lines)
+for i in os:
+    lines.append(i)
+for i in ps:
+    lines.append(i)
+for i in os_v:
+    values.append(i)
+for i in ps_v:
+    values.append(i)
 
+print(mistakes)
 
+txt_file = open(r"C:\Users\Bratislav\Desktop\petnica projekat\data\trainset 150.txt", "w", encoding= "utf-8-sig")
+txt_file.writelines(lines)
+# lines = []
+txt_file.close()
+
+values_file = open(r"C:\Users\Bratislav\Desktop\petnica projekat\data\trainset values 150.txt", "w", encoding= "utf-8-sig")
+values_file.writelines(values)
+values_file.close()
